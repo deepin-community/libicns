@@ -1,4 +1,10 @@
 #!/usr/bin/make -f
 
+#export DH_VERBOSE=1
+
+export CPPFLAGS += $(shell pkg-config --cflags libopenjp2)
 %:
-	dh $@
+	dh $@ --parallel --with autoreconf
+
+override_dh_makeshlibs:
+	dh_makeshlibs -V 'libicns1 (>= 0.7.0)'
