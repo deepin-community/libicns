@@ -28,8 +28,6 @@
 #include <png.h>
 #include <icns.h>
 
-#include <unistd.h>
-
 #define	FALSE	0
 #define	TRUE	1
 
