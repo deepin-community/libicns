@@ -530,17 +530,15 @@ int ExtractAndDescribeIconFamily(icns_family_t *iconFamily,char *description,cha
 			case ICNS_ICON_VERSION:
 			{
 				icns_byte_t	iconBytes[4];
-				union
-				{
-					icns_uint32_t	asUint32;
-					float		asFloat;
-				} iconVersion = { .asUint32 = 0 };
+				icns_uint32_t	iconVersion = 0;
+				float		iconVersionNumber = 0;
 				if(iconDataSize == 4) {
 					memcpy(&iconBytes[0],(dataPtr+dataOffset+8),4);
-					iconVersion.asUint32 = iconBytes[3]|iconBytes[2]<<8|iconBytes[1]<<16|iconBytes[0]<<24;
+					iconVersion = iconBytes[3]|iconBytes[2]<<8|iconBytes[1]<<16|iconBytes[0]<<24;
+					iconVersionNumber = *((float *)(&iconVersion));
 				}
 				if(extractMode & LIST_MODE) {
-					printf(" value: %f\n",iconVersion.asFloat);
+					printf(" value: %f\n",iconVersionNumber);
 				}
 			}
 			break;
